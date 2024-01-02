@@ -1,0 +1,19 @@
+{
+  "name": "nicholas-fnf-bot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.3",
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.3.1"
+  },
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "deploy-commands": "node src/events/deploy-commands.js"
+  },
+  "devDependencies": {
+    "eslint": "^8.56.0",
+    "nodemon": "^3.0.2"
+  }
+}
