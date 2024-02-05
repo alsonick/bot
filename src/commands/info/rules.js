@@ -1,3 +1,4 @@
+/* eslint-disable no-trailing-spaces */
 const { SlashCommandBuilder } = require('discord.js');
 const { THEME } = require('../../lib/constants');
 const { EmbedBuilder } = require('discord.js');
@@ -14,14 +15,18 @@ module.exports = {
 			const response = await axios.get(url);
 
 			// Sample Response
-            // [
-            //     {
+            // {
+            //   "success": true, 
+            //   "rules": [
+			//	   {	
             //       "id": 0
 			//		 "number": 0
 			//		 "title": ""
 			//		 "text": ""
-            //     }
-            // ]
+			//     }
+            //   ],
+			//   "count": 0
+            // }
 
 
 			const data = response.data;
