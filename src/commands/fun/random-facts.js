@@ -28,7 +28,7 @@ module.exports = {
 
             await interaction.reply(fact);
         } catch (error) {
-            await interaction.reply('Something went wrong with the request. Please try again later.');
+            await interaction.reply(`Something went wrong with the request. Please try again later.\n\n**Error:** ${error.message}`);
             console.error('Error:', error.message);
         }
 	},
