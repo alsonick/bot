@@ -17,13 +17,6 @@ module.exports = {
                 },
             });
 
-            // Sample Response
-            // [
-            //     {
-            //       "fact": ""
-            //     }
-            // ]
-
             const fact = response.data[0].fact;
 
             await interaction.reply(fact);

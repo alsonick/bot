@@ -14,21 +14,6 @@ module.exports = {
 		try {
 			const response = await axios.get(url);
 
-			// Sample Response
-            // {
-            //   "success": true, 
-            //   "rules": [
-			//	   {	
-            //       "id": 0
-			//		 "number": 0
-			//		 "title": ""
-			//		 "text": ""
-			//     }
-            //   ],
-			//   "count": 0
-            // }
-
-
 			const data = response.data;
 
 			if (!data.success) {
@@ -45,7 +30,9 @@ module.exports = {
 				.setColor(THEME)
 				.setTitle('Nicholas | Community Rules')
 				.setURL('https://notnick.io/api/community/rules')
-				.addFields(...rules);
+				.addFields(...rules)
+				.setTimestamp()
+                .setFooter({ text: 'Nicholas FnF | Community Rules', iconURL: 'https://notnick.io/branding/sig_avatar_one.png' });
 
 			interaction.reply({ embeds: [rulesEmbed] });
 
