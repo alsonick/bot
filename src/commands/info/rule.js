@@ -1,5 +1,5 @@
+const { THEME, DOMAIN, BOT_NAME } = require('../../lib/constants');
 const { SlashCommandBuilder } = require('discord.js');
-const { THEME } = require('../../lib/constants');
 const { EmbedBuilder } = require('discord.js');
 const axios = require('axios');
 
@@ -24,7 +24,7 @@ module.exports = {
                 return await interaction.reply('There are only 10 rules.');
             }
 
-            const url = `https://notnick.io/api/community/rules?r=${ruleNumberFormat}`;
+            const url = `https://${DOMAIN}/api/community/rules?r=${ruleNumberFormat}`;
 
             const response = await axios.get(url);
 
@@ -38,11 +38,12 @@ module.exports = {
 
             const rulesEmbed = new EmbedBuilder()
                 .setColor(THEME)
-                .setTitle(`Nicholas | Community Rules | Rule ${rule.number}`)
-                .setURL(`https://notnick.io/api/community/rules?r=${ruleNumberFormat}`)
+                .setThumbnail(`https://${DOMAIN}/Avatar.png`)
+                .setTitle(`Nicholas F&F | Community Rules | Rule ${rule.number}`)
+                .setURL(`https://${DOMAIN}/api/community/rules?r=${ruleNumberFormat}`)
                 .addFields({ name: `${rule.number}. ${rule.title}`, value: rule.text })
                 .setTimestamp()
-                .setFooter({ text: 'Nicholas FnF', iconURL: 'https://notnick.io/branding/sig_avatar_one.png' });
+                .setFooter({ text: BOT_NAME, iconURL: `https://${DOMAIN}/Avatar.png` });
 
             interaction.reply({ embeds: [rulesEmbed] });
 

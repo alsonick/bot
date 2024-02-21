@@ -1,6 +1,6 @@
 /* eslint-disable no-trailing-spaces */
+const { THEME, DOMAIN, BOT_NAME } = require('../../lib/constants');
 const { SlashCommandBuilder } = require('discord.js');
-const { THEME } = require('../../lib/constants');
 const { EmbedBuilder } = require('discord.js');
 const axios = require('axios');
 
@@ -9,7 +9,7 @@ module.exports = {
 		.setName('rules')
 		.setDescription('Replies with all the rules for the server!'),
 	async execute(interaction) {
-		const url = 'https://notnick.io/api/community/rules';
+		const url = `https://${DOMAIN}/api/community/rules`;
 
 		try {
 			const response = await axios.get(url);
@@ -17,7 +17,7 @@ module.exports = {
 			const data = response.data;
 
 			if (!data.success) {
-				return interaction.reply(data.error);
+				return await interaction.reply(data.error);
 			}
 
 			const rules = [];
@@ -28,11 +28,12 @@ module.exports = {
 
 			const rulesEmbed = new EmbedBuilder()
 				.setColor(THEME)
-				.setTitle('Nicholas | Community Rules')
-				.setURL('https://notnick.io/api/community/rules')
+				.setThumbnail(`https://${DOMAIN}/Avatar.png`)
+				.setTitle('Nicholas F&F | Community Rules')
+				.setURL(`https://${DOMAIN}/api/community/rules`)
 				.addFields(...rules)
 				.setTimestamp()
-                .setFooter({ text: 'Nicholas FnF | Community Rules', iconURL: 'https://notnick.io/branding/sig_avatar_one.png' });
+                .setFooter({ text: `${BOT_NAME} | Community Rules`, iconURL: `https://${DOMAIN}/Avatar.png` });
 
 			interaction.reply({ embeds: [rulesEmbed] });
 
