@@ -5,10 +5,10 @@ const axios = require('axios');
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('dev')
-		.setDescription(`The dev info for my site (${DOMAIN}).`),
+		.setName('rags')
+		.setDescription('A collection of my favorite ragtime compositions.'),
 	async execute(interaction) {
-        const url = `https://${DOMAIN}/api/dev`;
+        const url = `https://${DOMAIN}/api/rags`;
 
 		try {
             const response = await axios.get(url);
@@ -19,21 +19,21 @@ module.exports = {
 				return interaction.reply(data.error);
 			}
 
-            const dev = [];
+            const rags = [];
 
-            for (const d of Object.entries(data.dev)) {
-                dev.push({ name: `${d[0]}:`, value: `${d[1]}`, inline: true });
+            for (const rag of data.rags) {
+                rags.push({ name: `${rag.title} (${rag.date})`, value: rag.composer, inline: true });
             }
 
-            const devEmbed = new EmbedBuilder()
+            const ragsEmbed = new EmbedBuilder()
                 .setColor(THEME)
-                .setTitle('Nicholas F&F | Dev')
-                .setURL(`https://${DOMAIN}/api/dev`)
-                .addFields(...dev)
+                .setTitle('Nicholas F&F | Rags')
+                .setURL(`https://${DOMAIN}/rags`)
+                .addFields(...rags)
 				.setTimestamp()
-                .setFooter({ text: `${BOT_NAME} | Dev`, iconURL: `https://${DOMAIN}/${AVATAR}` });
+                .setFooter({ text: `${BOT_NAME} | Rags`, iconURL: `https://${DOMAIN}/${AVATAR}` });
 
-            interaction.reply({ embeds: [devEmbed] });
+            interaction.reply({ embeds: [ragsEmbed] });
 
 		} catch (error) {
 			await interaction.reply(`Something went wrong with the request. Please try again later.\n\n**Error:** ${error.message}`);

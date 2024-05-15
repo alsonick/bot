@@ -1,4 +1,4 @@
-const { THEME, DOMAIN, BOT_NAME } = require('../../lib/constants');
+const { THEME, DOMAIN, BOT_NAME, AVATAR } = require('../../lib/constants');
 const { SlashCommandBuilder } = require('discord.js');
 const { EmbedBuilder } = require('discord.js');
 const axios = require('axios');
@@ -38,12 +38,12 @@ module.exports = {
 
             const rulesEmbed = new EmbedBuilder()
                 .setColor(THEME)
-                .setThumbnail(`https://${DOMAIN}/Avatar.png`)
+                .setThumbnail(`https://${DOMAIN}/${AVATAR}`)
                 .setTitle(`Nicholas F&F | Community Rules | Rule ${rule.number}`)
                 .setURL(`https://${DOMAIN}/api/community/rules?r=${ruleNumberFormat}`)
                 .addFields({ name: `${rule.number}. ${rule.title}`, value: rule.text })
                 .setTimestamp()
-                .setFooter({ text: BOT_NAME, iconURL: `https://${DOMAIN}/Avatar.png` });
+                .setFooter({ text: BOT_NAME, iconURL: `https://${DOMAIN}/${AVATAR}` });
 
             interaction.reply({ embeds: [rulesEmbed] });
 

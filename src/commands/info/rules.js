@@ -1,5 +1,5 @@
 /* eslint-disable no-trailing-spaces */
-const { THEME, DOMAIN, BOT_NAME } = require('../../lib/constants');
+const { THEME, DOMAIN, BOT_NAME, AVATAR } = require('../../lib/constants');
 const { SlashCommandBuilder } = require('discord.js');
 const { EmbedBuilder } = require('discord.js');
 const axios = require('axios');
@@ -28,12 +28,12 @@ module.exports = {
 
 			const rulesEmbed = new EmbedBuilder()
 				.setColor(THEME)
-				.setThumbnail(`https://${DOMAIN}/Avatar.png`)
+				.setThumbnail(`https://${DOMAIN}/${AVATAR}`)
 				.setTitle('Nicholas F&F | Community Rules')
 				.setURL(`https://${DOMAIN}/api/community/rules`)
 				.addFields(...rules)
 				.setTimestamp()
-                .setFooter({ text: `${BOT_NAME} | Community Rules`, iconURL: `https://${DOMAIN}/Avatar.png` });
+                .setFooter({ text: `${BOT_NAME} | Community Rules`, iconURL: `https://${DOMAIN}/${AVATAR}` });
 
 			interaction.reply({ embeds: [rulesEmbed] });
 
