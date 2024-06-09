@@ -1,25 +1,26 @@
 const { SlashCommandBuilder } = require('discord.js');
 const axios = require('axios');
 
-require('dotenv').config();
-
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('facts')
-		.setDescription('Replies with tons of random interesting facts about cool topics.'),
+		.setName('quote')
+		.setDescription('Replies with a of random quotes.'),
 	async execute(interaction) {
-        const url = 'https://api.api-ninjas.com/v1/facts';
+        const url = 'https://api.quotable.io/random';
 
         try {
             const response = await axios.get(url, {
                 headers: {
-                    'X-Api-Key': process.env.API_NINJAS_API_KEY,
+                    'Content-Type': 'application/json',
                 },
             });
 
-            const fact = response.data[0].fact;
+            const quote = response.data.content;
+            const author = response.data.author;
 
-            await interaction.reply(fact);
+            const string = `"${quote}" - ${author}`;
+
+            await interaction.reply(string);
         } catch (error) {
             await interaction.reply(`Something went wrong with the request. Please try again later.\nError: ${error.message}`);
             console.error('Error:', error.message);

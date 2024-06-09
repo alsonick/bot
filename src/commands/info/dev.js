@@ -36,7 +36,7 @@ module.exports = {
             interaction.reply({ embeds: [devEmbed] });
 
 		} catch (error) {
-			await interaction.reply(`Something went wrong with the request. Please try again later.\n\n**Error:** ${error.message}`);
+			await interaction.reply(`Something went wrong with the request. Please try again later.\nError: ${error.message}`);
             console.error('Error:', error.message);
 		}
 	},
