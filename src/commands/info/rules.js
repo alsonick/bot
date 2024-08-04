@@ -1,5 +1,6 @@
 /* eslint-disable no-trailing-spaces */
 const { THEME, DOMAIN, BOT_NAME, AVATAR } = require('../../lib/constants');
+const { interactionError } = require('../../lib/interaction-error');
 const { SlashCommandBuilder } = require('discord.js');
 const { EmbedBuilder } = require('discord.js');
 const axios = require('axios');
@@ -29,7 +30,7 @@ module.exports = {
 			const rulesEmbed = new EmbedBuilder()
 				.setColor(THEME)
 				.setThumbnail(`https://${DOMAIN}/${AVATAR}`)
-				.setTitle('Nicholas F&F | Community Rules')
+				.setTitle(`${BOT_NAME} | Community Rules`)
 				.setURL(`https://${DOMAIN}/api/community/rules`)
 				.addFields(...rules)
 				.setTimestamp()
@@ -38,8 +39,7 @@ module.exports = {
 			interaction.reply({ embeds: [rulesEmbed] });
 
 		} catch (error) {
-            await interaction.reply(`Something went wrong with the request. Please try again later.\nError: ${error.message}`);
-            console.error('Error:', error.message);
+            await interactionError(interaction, error);
 		}
 	},
 };

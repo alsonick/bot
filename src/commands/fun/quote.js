@@ -1,3 +1,4 @@
+const { interactionError } = require('../../lib/interaction-error');
 const { SlashCommandBuilder } = require('discord.js');
 const axios = require('axios');
 
@@ -22,8 +23,7 @@ module.exports = {
 
             await interaction.reply(string);
         } catch (error) {
-            await interaction.reply(`Something went wrong with the request. Please try again later.\nError: ${error.message}`);
-            console.error('Error:', error.message);
+            await interactionError(interaction, error);
         }
 	},
 };

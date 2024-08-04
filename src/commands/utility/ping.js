@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require('discord.js');
+const { interactionError } = require('../../lib/interaction-error');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -8,8 +9,7 @@ module.exports = {
 		try {
 			await interaction.reply('Pong!');
 		} catch (error) {
-			await interaction.reply(`Something went wrong with the request. Please try again later.\nError: ${error.message}`);
-            console.error('Error:', error.message);
+			await interactionError(interaction, error);
 		}
 	},
 };

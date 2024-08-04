@@ -1,4 +1,5 @@
 const { THEME, DOMAIN, BOT_NAME, AVATAR } = require('../../lib/constants');
+const { interactionError } = require('../../lib/interaction-error');
 const { SlashCommandBuilder } = require('discord.js');
 const { EmbedBuilder } = require('discord.js');
 const axios = require('axios');
@@ -27,7 +28,7 @@ module.exports = {
 
             const ragsEmbed = new EmbedBuilder()
                 .setColor(THEME)
-                .setTitle('Nicholas F&F | Rags')
+                .setTitle(`${BOT_NAME} | Rags`)
                 .setURL(`https://${DOMAIN}/rags`)
                 .addFields(...rags)
 				.setTimestamp()
@@ -36,8 +37,7 @@ module.exports = {
             interaction.reply({ embeds: [ragsEmbed] });
 
 		} catch (error) {
-			await interaction.reply(`Something went wrong with the request. Please try again later.\nError: ${error.message}`);
-            console.error('Error:', error.message);
+			await interactionError(interaction, error);
 		}
 	},
 };
