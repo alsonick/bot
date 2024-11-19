@@ -30,7 +30,7 @@ module.exports = {
 			const rulesEmbed = new EmbedBuilder()
 				.setColor(THEME)
 				.setThumbnail(`https://${DOMAIN}/${AVATAR}`)
-				.setTitle(`${BOT_NAME} | Community Rules`)
+				.setTitle('Nicholas F&F | Community Rules')
 				.setURL(`https://${DOMAIN}/api/community/rules`)
 				.addFields(...rules)
 				.setTimestamp()
